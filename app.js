@@ -4,7 +4,7 @@ let playerSelection = "";
 
 function getComputerChoice() {
     let randomNum = Math.floor(Math.random() * gameMoves.length);
-    computerSelection = gameMoves[randomNum];
+    computerSelection = gameMoves[randomNum].toLowerCase();
 }
 
 function getPlayerSelection() {
