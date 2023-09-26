@@ -1,49 +1,50 @@
-const gameMoves = ["Paper", "Rock", "Scissors"]
+const btns = document.querySelectorAll('button');
+const displayResult = document.querySelector('.result');
+const displayPlayerScore = document.querySelector('.player-score');
+const displayComputerScore = document.querySelector('.computer-score');
+const gameMoves = ["Paper", "Rock", "Scissors"];
 let computerSelection = "";
 let playerSelection = "";
 let playerScore = 0;
 let computerScore = 0;
+
+btns.forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        if(playerScore === 5 || computerScore === 5) {
+            console.log('game ends');
+        } else {
+            playerSelection = e.target.id;
+            playRound();
+        }
+    });
+});
 
 function getComputerChoice() {
     let randomNum = Math.floor(Math.random() * gameMoves.length);
     computerSelection = gameMoves[randomNum].toLowerCase();
 }
 
-function getPlayerSelection() {
-    playerSelection = prompt("Type your bet! Available options: Paper or Rock or Scissors").toLowerCase();
-}
-
 function playRound() {
+    getComputerChoice();
     if (computerSelection === "paper" && playerSelection === "rock") {
         computerScore++;
-        console.log(`You Lose! ${computerSelection} beats ${playerSelection}`)
+        displayResult.textContent = `You Lose! ${computerSelection} beats ${playerSelection}`;
     } else if (computerSelection === "rock" && playerSelection === "scissors") {
         computerScore++;
-        console.log(`You Lose! ${computerSelection} beats ${playerSelection}`)
+        displayResult.textContent = `You Lose! ${computerSelection} beats ${playerSelection}`;
     } else if (computerSelection === "scissors" && playerSelection === "paper") {
         computerScore++;
-        console.log(`You Lose! ${computerSelection} beats ${playerSelection}`)
+        displayResult.textContent = `You Lose! ${computerSelection} beats ${playerSelection}`;
     } else if (computerSelection === playerSelection) {
-        console.log(`It's a draw! ${computerSelection} equals ${playerSelection}`)
+        displayResult.textContent = `It's a draw! ${computerSelection} equals ${playerSelection}`;
     } else {
         playerScore++;
-        console.log(`You Win! ${playerSelection} beats ${computerSelection}`)
+        displayResult.textContent = `You Win! ${playerSelection} beats ${computerSelection}`;
     }
+    scoreUpdate();
 }
 
-function game() {
-    for (let i = 0; i < 5; i++) {
-        getComputerChoice()
-        getPlayerSelection()
-        playRound()
-    }
-    if (computerScore > playerScore) {
-        console.log("Computer Won!")
-    } else if (computerScore === playerScore) {
-        console.log("It's a Draw!")
-    } else {
-        console.log("Well done! You beat the machine")
-    }
+function scoreUpdate() {
+    displayComputerScore.textContent = computerScore;
+    displayPlayerScore.textContent = playerScore;
 }
-
-game()
