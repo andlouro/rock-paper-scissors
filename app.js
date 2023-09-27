@@ -11,7 +11,7 @@ let computerScore = 0;
 btns.forEach(btn => {
     btn.addEventListener('click', function(e) {
         if(playerScore === 5 || computerScore === 5) {
-            console.log('game ends');
+            displayResult.textContent = `Game ended. Player: ${playerScore}, Machine: ${computerScore}`;
         } else {
             playerSelection = e.target.id;
             playRound();
